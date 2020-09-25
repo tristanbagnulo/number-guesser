@@ -2,6 +2,7 @@ package au.edu.unsw.infs3634.numberguesser;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -19,6 +20,10 @@ public class MainActivity extends AppCompatActivity {
     EditText numberInput;
     Button submitButton;
 
+    //Best practice is to reference a string to send to ResultActivity as a public variable
+    public static final String EXTRA_NUMBER_USER = "cau.edu.unsw.infs3634.numberguesser.EXTRA_NUMBER_USER";
+    public static final String EXTRA_NUMBER_RANDOM = "cau.edu.unsw.infs3634.numberguesser.EXTRA_NUMBER_RANDOM";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
         //Create and display the random number
         Random myRandom = new Random();
         final int randomNumber = myRandom.nextInt(100)+1;
+            //Display random number in MainActivity
         TextView myText = (TextView)findViewById(R.id.idRandomNumber);
         String myString = String.valueOf(randomNumber);
         myText.setText(myString);
@@ -45,14 +51,14 @@ public class MainActivity extends AppCompatActivity {
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //Assign submitted number to the variable "number"
                 number = Integer.valueOf(numberInput.getText().toString());
 
-                // Check whether number is equal, higher or lower...
-                if (number == randomNumber){
+                //Launch the ResultActivity which determines whether number is equal,
+                // higher or lower, and shows a result
+                launchResultActivity(randomNumber);
 
-                }
-
-                //Toast to show input data
+                //TEMPORARY - Toast to display the data received from the user
                 showToast(String.valueOf(number));
                 // RN - showToast(String.valueOf(myRandom));
             }
@@ -62,10 +68,24 @@ public class MainActivity extends AppCompatActivity {
             //TO DO - Research "setOnClickListener", "new" and "View" (this required its own class).
     }
 
+    private void launchResultActivity(int randomNumber){
+        //Specifying information to sent
+        EditText editText1 = (EditText) findViewById(R.id.idNumberInput);
+            //^links the user's input number to a variable "editText1"
+        int number = Integer.parseInt(editText1.getText().toString());
+            //Now the user's input is an integer
+
+        //Now send this above int to the ResultActivity
+            //Create Intent object and assign it to the variable "intent"
+        Intent intent = new Intent(this, ResultActivity.class);
+            //send the number that the user input and the randomNumber
+        intent.putExtra(EXTRA_NUMBER_USER, number);
+        intent.putExtra(EXTRA_NUMBER_RANDOM, randomNumber);
+        startActivity(intent);
+    }
 
     private void showToast (String text) {
         Toast.makeText(MainActivity.this, text, Toast.LENGTH_SHORT).show();
-
     }
 
 }

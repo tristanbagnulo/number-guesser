@@ -4,9 +4,13 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 public class ResultActivity extends AppCompatActivity {
+
+    Button guessAgainButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +49,16 @@ public class ResultActivity extends AppCompatActivity {
             String guessesLeftString = String.valueOf("You have "+(5-numberOfGuesses())+" guesses remaining");
             guessesLeft.setText(guessesLeftString);
         }
+
+        guessAgainButton = (Button) findViewById(R.id.idGuessAgainButton);
+        guessAgainButton.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v){
+                finish();
+            }
+        });
+
+
+
     }
 
     private static int numberOfGuesses = 0;

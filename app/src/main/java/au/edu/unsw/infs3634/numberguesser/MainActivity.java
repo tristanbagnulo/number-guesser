@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
         //Create and display the random number
         Random myRandom = new Random();
         final int randomNumber = myRandom.nextInt(100)+1;
-            //Display random number in MainActivity
+            //TEMPORARY - Display random number in MainActivity
         TextView myText = (TextView)findViewById(R.id.idRandomNumber);
         String myString = String.valueOf(randomNumber);
         myText.setText(myString);

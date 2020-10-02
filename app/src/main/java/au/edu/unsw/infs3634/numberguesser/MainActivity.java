@@ -36,22 +36,22 @@ public class MainActivity extends AppCompatActivity {
         TextView myText = (TextView)findViewById(R.id.idRandomNumber);
         String myString = String.valueOf(randomNumber);
         myText.setText(myString);
-            //TO DO - Find out what setText means.
 
+        /* MIGHT NOT INCLUDE
         //Getting the number of guesses remaining from Result Act.
         // - create ResultActivity object
         ResultActivity obj1 = new ResultActivity();
-        int numberOfGuessesRemaining = obj1.getNumberOfGuesses();
+        int numberOfGuesses = obj1.getNumberOfGuesses();
         // - pushing number of guesses left to text in MainActivity display
         TextView newText = (TextView)findViewById(R.id.idGuessesRemainingMain);
-        String newString = String.valueOf("Guesses left: "+numberOfGuessesRemaining);
+        String newString = String.valueOf("Guesses left: "+(5-numberOfGuesses));
         newText.setText(newString);
+         */
 
         //Assign the EditText widget the user input to the variable "numberInput"
         numberInput = (EditText) findViewById(R.id.idNumberInput);
             // TO DO - Research "findViewByID" and how it works
             // TO DO Find out what this EditText class thing is
-
         //Assign Button widget to a the variable "submitButton".
         submitButton = (Button) findViewById(R.id.idSubmitButton);
 
@@ -62,39 +62,25 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 //Assign submitted number to the variable "number"
                 number = Integer.valueOf(numberInput.getText().toString());
-
                 //Launch the ResultActivity which determines whether number is equal,
                 // higher or lower, and shows a result
                 launchResultActivity(randomNumber);
-
-                //TEMPORARY - Toast to display the data received from the user
-                showToast(String.valueOf(number));
-                // RN - showToast(String.valueOf(myRandom));
             }
-
         });
-            //TO DO - Find out what "onClick(View v)" does.
-            //TO DO - Research "setOnClickListener", "new" and "View" (this required its own class).
     }
 
     private void launchResultActivity(int randomNumber){
-        //Specifying information to sent
+        //Specifying information to sent. This links the user's input number to a variable
+        // "editText1"
         EditText editText1 = (EditText) findViewById(R.id.idNumberInput);
-            //^links the user's input number to a variable "editText1"
+        //Now the user's input is an integer
         int number = Integer.parseInt(editText1.getText().toString());
-            //Now the user's input is an integer
-
         //Now send this above int to the ResultActivity
-            //Create Intent object and assign it to the variable "intent"
+        // Step 1: Create Intent object and assign it to the variable "intent"
         Intent intent = new Intent(this, ResultActivity.class);
-            //send the number that the user input and the randomNumber
+        // Step 2: send the number that the user input and the randomNumber
         intent.putExtra(EXTRA_NUMBER_USER, number);
         intent.putExtra(EXTRA_NUMBER_RANDOM, randomNumber);
         startActivity(intent);
     }
-
-    private void showToast (String text) {
-        Toast.makeText(MainActivity.this, text, Toast.LENGTH_SHORT).show();
-    }
-
 }

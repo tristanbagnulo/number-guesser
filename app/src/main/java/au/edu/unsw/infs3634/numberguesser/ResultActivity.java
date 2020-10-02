@@ -12,7 +12,7 @@ public class ResultActivity extends AppCompatActivity {
 
     Button guessAgainButton;
     //declare instance variable
-    private int numberOfGuesses = 0;
+    private static int numberOfGuesses = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,15 +35,9 @@ public class ResultActivity extends AppCompatActivity {
         setNumberOfGuesses(numberOfGuesses);
         if (getNumberOfGuesses() <= 4) {
             if (numberUser == numberRandom) {
-                /*
-                String myString = String.valueOf("Congratulations! You guessed it RIGHT!");
-                myText.setText(myString);
-                //Set "number of tries remaining" text box text to nothing
-                String guessesLeftString = String.valueOf("");
-                guessesLeft.setText(guessesLeftString);
-                */
                 launchSuccessActivity();
-
+                setNumberOfGuesses(-1);
+                finish();
             } else if (numberUser < numberRandom) {
                 String myString = String.valueOf("Incorrect! You guessed too LOW.");
                 myText.setText(myString);
@@ -60,6 +54,8 @@ public class ResultActivity extends AppCompatActivity {
         } else {
             //Launch the Termination screen
             launchTerminateActivity();
+            setNumberOfGuesses(-1);
+            finish();
         }
 
     guessAgainButton = (Button) findViewById(R.id.idGuessAgainButton);
@@ -74,26 +70,29 @@ public class ResultActivity extends AppCompatActivity {
         });
     }
 
-
+    //Launches the activity suitable for reaching maximum guesses
     private void launchTerminateActivity() {
     //Launch it with an intent
     Intent intent = new Intent(ResultActivity.this, TerminateActivity.class);
     startActivity(intent);
     }
 
+    //Launches the activity suitable for the user guessing correctly
     private void launchSuccessActivity() {
         //Launch it with an intent
         Intent intent = new Intent(ResultActivity.this, SuccessActivity.class);
         startActivity(intent);
     }
 
-
+    public void onDestroy() {
+        super.onDestroy();
+    }
 
     //Increase number of guesses by 1
     public void setNumberOfGuesses(int numberOfGuesses){
         this.numberOfGuesses = numberOfGuesses + 1;
     }
-
+    //Make the number of guesses available
     public int getNumberOfGuesses() {
         return numberOfGuesses;
     }

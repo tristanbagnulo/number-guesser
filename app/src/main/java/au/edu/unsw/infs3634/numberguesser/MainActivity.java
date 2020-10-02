@@ -38,6 +38,15 @@ public class MainActivity extends AppCompatActivity {
         myText.setText(myString);
             //TO DO - Find out what setText means.
 
+        //Getting the number of guesses remaining from Result Act.
+        // - create ResultActivity object
+        ResultActivity obj1 = new ResultActivity();
+        int numberOfGuessesRemaining = obj1.getNumberOfGuesses();
+        // - pushing number of guesses left to text in MainActivity display
+        TextView newText = (TextView)findViewById(R.id.idGuessesRemainingMain);
+        String newString = String.valueOf("Guesses left: "+numberOfGuessesRemaining);
+        newText.setText(newString);
+
         //Assign the EditText widget the user input to the variable "numberInput"
         numberInput = (EditText) findViewById(R.id.idNumberInput);
             // TO DO - Research "findViewByID" and how it works

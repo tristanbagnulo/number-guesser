@@ -4,14 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".TerminateActivity">
-
+    tools:context=".SuccessActivity">
 
     <TextView
         android:id="@+id/textView"
         android:layout_width="289dp"
         android:layout_height="110dp"
-        android:text="Sorry. You've run out of guesses."
+        android:layout_marginTop="30dp"
+        android:text="Congratulations! You guessed it right."
         android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -19,11 +19,13 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="307dp"
-        android:layout_height="309dp"
+        android:layout_width="295dp"
+        android:layout_height="312dp"
+        android:layout_marginTop="30dp"
         android:contentDescription="Game Over Image"
-        android:src="@drawable/gameover"
+        android:src="@drawable/first"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -11,6 +11,8 @@ import android.widget.TextView;
 public class ResultActivity extends AppCompatActivity {
 
     Button guessAgainButton;
+    //declare instance variable
+    private int numberOfGuesses = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,25 +31,30 @@ public class ResultActivity extends AppCompatActivity {
         //Declare and allocate variable to "number of tries remaining" text box
         TextView guessesLeft = (TextView)findViewById(R.id.idGuessesRemaining);
 
-        int guessNumber = numberOfGuesses();
-        if (guessNumber <= 5) {
+        //Increase the guesses counter
+        setNumberOfGuesses(numberOfGuesses);
+        if (getNumberOfGuesses() <= 4) {
             if (numberUser == numberRandom) {
+                /*
                 String myString = String.valueOf("Congratulations! You guessed it RIGHT!");
                 myText.setText(myString);
                 //Set "number of tries remaining" text box text to nothing
                 String guessesLeftString = String.valueOf("");
                 guessesLeft.setText(guessesLeftString);
+                */
+                launchSuccessActivity();
+
             } else if (numberUser < numberRandom) {
                 String myString = String.valueOf("Incorrect! You guessed too LOW.");
                 myText.setText(myString);
                 //Get new number of tries and display it
-                String guessesLeftString = String.valueOf("You have " + (5 - guessNumber) + " guesses remaining");
+                String guessesLeftString = String.valueOf("You have " + (5 - getNumberOfGuesses()) + " guesses remaining");
                 guessesLeft.setText(guessesLeftString);
             } else {
                 String myString = String.valueOf("Incorrect! You guesses too HIGH.");
                 myText.setText(myString);
                 //Get new number of tries and display it
-                String guessesLeftString = String.valueOf("You have " + (5 - guessNumber) + " guesses remaining");
+                String guessesLeftString = String.valueOf("You have " + (5 - getNumberOfGuesses()) + " guesses remaining");
                 guessesLeft.setText(guessesLeftString);
             }
         } else {
@@ -58,10 +65,15 @@ public class ResultActivity extends AppCompatActivity {
     guessAgainButton = (Button) findViewById(R.id.idGuessAgainButton);
         guessAgainButton.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
+                /*
+                Intent intent = new Intent(ResultActivity.this, TerminateActivity.class);
+                startActivity(intent);
+                */
                 finish();
             }
         });
     }
+
 
     private void launchTerminateActivity() {
     //Launch it with an intent
@@ -69,12 +81,20 @@ public class ResultActivity extends AppCompatActivity {
     startActivity(intent);
     }
 
-    private static int numberOfGuesses = 0;
+    private void launchSuccessActivity() {
+        //Launch it with an intent
+        Intent intent = new Intent(ResultActivity.this, SuccessActivity.class);
+        startActivity(intent);
+    }
+
+
 
     //Increase number of guesses by 1
-    public int numberOfGuesses() {
-        //Declare the original number of tries to be 0
-        numberOfGuesses++;
+    public void setNumberOfGuesses(int numberOfGuesses){
+        this.numberOfGuesses = numberOfGuesses + 1;
+    }
+
+    public int getNumberOfGuesses() {
         return numberOfGuesses;
     }
 }

@@ -33,11 +33,13 @@ public class MainActivity extends AppCompatActivity {
         Random myRandom = new Random();
         final int randomNumber = myRandom.nextInt(100)+1;
             //TEMPORARY - Display random number in MainActivity
+        /*
         TextView myText = (TextView)findViewById(R.id.idRandomNumber);
         String myString = String.valueOf(randomNumber);
         myText.setText(myString);
+        */
 
-        /* MIGHT NOT INCLUDE
+        /* DID NOT INCLUDE IN FINAL
         //Getting the number of guesses remaining from Result Act.
         // - create ResultActivity object
         ResultActivity obj1 = new ResultActivity();
@@ -60,11 +62,16 @@ public class MainActivity extends AppCompatActivity {
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Assign submitted number to the variable "number"
-                number = Integer.valueOf(numberInput.getText().toString());
-                //Launch the ResultActivity which determines whether number is equal,
-                // higher or lower, and shows a result
-                launchResultActivity(randomNumber);
+                //Create and error that shows when no number is added.
+                if (numberInput.length()==0){
+                    numberInput.setError("Please enter a number");
+                } else {
+                    //Assign submitted number to the variable "number"
+                    number = Integer.valueOf(numberInput.getText().toString());
+                    //Launch the ResultActivity which determines whether number is equal,
+                    // higher or lower, and shows a result
+                    launchResultActivity(randomNumber);
+                }
             }
         });
     }

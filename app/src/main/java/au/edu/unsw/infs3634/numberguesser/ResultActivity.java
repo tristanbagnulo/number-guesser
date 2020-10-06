@@ -45,7 +45,7 @@ public class ResultActivity extends AppCompatActivity {
                 String guessesLeftString = String.valueOf("You have " + (5 - getNumberOfGuesses()) + " guesses remaining");
                 guessesLeft.setText(guessesLeftString);
             } else {
-                String myString = String.valueOf("Incorrect! You guesses too HIGH.");
+                String myString = String.valueOf("Incorrect! You guessed too HIGH.");
                 myText.setText(myString);
                 //Get new number of tries and display it
                 String guessesLeftString = String.valueOf("You have " + (5 - getNumberOfGuesses()) + " guesses remaining");

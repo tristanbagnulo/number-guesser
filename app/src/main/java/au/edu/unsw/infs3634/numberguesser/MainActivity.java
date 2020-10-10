@@ -33,11 +33,10 @@ public class MainActivity extends AppCompatActivity {
         Random myRandom = new Random();
         final int randomNumber = myRandom.nextInt(100)+1;
             //TEMPORARY - Display random number in MainActivity
-        /*
+
         TextView myText = (TextView)findViewById(R.id.idRandomNumber);
         String myString = String.valueOf(randomNumber);
         myText.setText(myString);
-        */
 
         /* DID NOT INCLUDE IN FINAL
         //Getting the number of guesses remaining from Result Act.
